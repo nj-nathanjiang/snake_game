@@ -13,17 +13,13 @@ class Snake:
         self.squares = []
         self.color = color
         self.speed = speed
-        square_segment = t.Turtle(shape="square")
-        square_segment.penup()
-        square_segment.color(self.color)
-        square_segment.goto(POSITIONS[0])
-        square_segment.showturtle()
-        self.squares.append(square_segment)
-        self.head = self.squares[0]
+        self.head = None
 
     def make_snake(self):
+        self.add_segment(POSITIONS[0])
         self.add_segment(POSITIONS[1])
         self.add_segment(POSITIONS[2])
+        self.head = self.squares[0]
 
     def extend(self):
         self.add_segment(self.squares[-1].position())
@@ -58,3 +54,10 @@ class Snake:
         square_segment.goto(position)
         square_segment.showturtle()
         self.squares.append(square_segment)
+
+    def reset(self):
+        for square in self.squares:
+            square.goto(10000, 10000)
+        self.squares.clear()
+        self.make_snake()
+        self.head = self.squares[0]
